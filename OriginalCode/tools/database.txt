@@ -1,0 +1,76 @@
+_________________________________________________________________________________________
+| TubeKit Beta 4									|
+| http://www.tubekit.org								|
+| Author: Chirag Shah									|
+| Date: 08/08/2009									|
+| This instructions file developed by Chirag Shah is licensed under a 			|
+| Creative Commons Attribution-Noncommercial-Share Alike 3.0 United States License.	|
+_________________________________________________________________________________________
+
+You need to have MySQL installed on any platform. This document covers the following topics.
+
+1. Creating a database
+2. Selecting a database
+3. Creating a table for storing YouTube video details
+4. Creating a table for storing video comments
+5. Creating a table for storing YouTube author profile details
+
+1. First, create a database. We'll use 'yt' as the name.
+	> create database `yt`;
+
+2. Next, select that database.
+	> use `yt`;
+	
+Now you can create the required table(s).
+
+3. To store data from crawling YouTube videos, issue the following command on MySQL.
+	> CREATE TABLE `yt_videos` (
+  		`id` int(11) unsigned NOT NULL auto_increment,
+  		`yt_id` varchar(20) default NULL,
+  		`title` varchar(200) default NULL,
+  		`description` blob,
+  		`username` varchar(50) default NULL,
+  		`published` date default NULL,
+  		`duration` int(11) default NULL,
+  		`category` varchar(200) default NULL,
+  		`keywords` blob,
+  		`video_url` varchar(100) default NULL,
+  		`thumb_url` varchar(100) default NULL,
+  		`view_count` int(11) default NULL,
+  		`rating_count` int(11) default NULL,
+  		`rating_avg` float default NULL,
+  		`comment_count` int(11) default NULL,
+  		`favorite_count` int(11) default NULL,
+  		`collectiondate` date default NULL,
+  		PRIMARY KEY  (`id`)
+		);
+
+4. To store the comments, issue the following command on MySQL.
+	> CREATE TABLE `yt_comments` (
+		  `id` int(11) NOT NULL auto_increment,
+		  `url` varchar(100) default NULL,
+		  `author` varchar(100) default NULL,
+		  `comment` text,
+		  PRIMARY KEY  (`id`)
+		); 
+		
+5. To store YouTube author profiles, issue the following command on MySQL.
+	> CREATE TABLE `yt_profiles` (
+		`id` int(11) NOT NULL auto_increment,
+		`userName` varchar(100) default NULL,
+		`firstName` varchar(100) default NULL,
+		`lastName` varchar(100) default NULL,
+		`gender` varchar(20) default NULL,
+		`age` int(11) default NULL,
+		`hometown` varchar(100) default NULL,
+		`location` varchar(500) default NULL,
+		`occupation` varchar(1000) default NULL,
+		`company` varchar(1000) default NULL,
+		`school` varchar(1000) default NULL,
+		`hobbies` text,
+		`movies` text,
+		`music` text,
+		`books` text,
+		`collectiondate` date default NULL,
+		PRIMARY KEY  (`id`)
+		);
