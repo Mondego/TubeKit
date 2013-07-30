@@ -52,7 +52,8 @@
   
 			  // get <gd:rating> node for video ratings
 			  $gd = $entry->children('http://schemas.google.com/g/2005'); 
-			  $obj->rating =0;
+			  $obj->numrating = 0;
+			  $obj->rating = 0;
 			  if ($gd->rating) { 
 			    $attrs = $gd->rating->attributes();
 			    $obj->rating = $attrs['average']; 
@@ -64,6 +65,7 @@
 			  if ($gd->comments->feedLink) { 
 			    $attrs = $gd->comments->feedLink->attributes();
 			    $obj->commentsURL = $attrs['href']; 
+			    $commentsCount = 0;
 			    if(isset($attrs['countHint']))
 			    {
 				$obj->commentsCount = $attrs['countHint']; 
